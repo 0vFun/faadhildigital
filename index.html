@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Faadhil Digital — Super Premium Agency</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.16/dist/lenis.min.js"></script>
+
+<style>
+
+:root{
+    --gold:#d4af37;
+    --gold2:#ffdf73;
+    --dark:#050505;
+    --soft:#111111;
+    --text:#f2f2f2;
+    --gray:#9e9e9e;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+html,body{
+    overflow-x:hidden;
+    background:#050505;
+    font-family:'Montserrat',sans-serif;
+    color:var(--text);
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+    linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.94)),
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') center/cover;
+    z-index:-4;
+}
+
+.noise{
+    position:fixed;
+    inset:0;
+    opacity:.03;
+    background:url('https://grainy-gradients.vercel.app/noise.svg');
+    z-index:-3;
+    pointer-events:none;
+}
+
+.glow{
+    position:fixed;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(212,175,55,.15),transparent 70%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:-2;
+}
+
+/* =========================
+LOADER
+========================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:99999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    transition:1s;
+}
+
+.loader h1{
+    font-size:4rem;
+    color:var(--gold);
+    letter-spacing:6px;
+    font-family:'Playfair Display',serif;
+}
+
+.loader p{
+    margin-top:15px;
+    color:#777;
+    letter-spacing:4px;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* =========================
+SCROLL BAR
+========================= */
+
+.progress{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--gold2));
+    z-index:999999;
+    box-shadow:0 0 20px rgba(212,175,55,.8);
+}
+
+/* =========================
+NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:9999;
+    padding:22px 0;
+    backdrop-filter:blur(20px);
+    background:rgba(0,0,0,.35);
+    border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.nav-container{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:1.8rem;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+.nav-links{
+    display:flex;
+    gap:40px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    font-size:.95rem;
+    transition:.4s;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0%;
+    height:2px;
+    background:var(--gold);
+    transition:.4s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* =========================
+INTRO PNG
+========================= */
+
+.intro{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    animation:fadeOutIntro 1s ease 2.5s forwards;
+}
+
+.intro img{
+    max-width:500px;
+    width:80%;
+    opacity:0;
+    transform:scale(0.9);
+    animation:fadeInUp 1s ease 0.3s forwards;
+}
+
+@keyframes fadeInUp{
+    to{ opacity:1; transform:scale(1); }
+}
+
+@keyframes fadeOutIntro{
+    to{ opacity:0; visibility:hidden; }
+}
+
+.logo img{
+    height: 80px;
+    width:auto;
+    display:block;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    padding:180px 20px 100px;
+}
+
+.hero-content{
+    max-width:1100px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 28px;
+    border-radius:999px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    color:var(--gold);
+    margin-bottom:35px;
+}
+
+.hero h1{
+    font-size:clamp(3.5rem,8vw,8rem);
+    line-height:.95;
+    margin-bottom:35px;
+    font-family:'Playfair Display',serif;
+    text-transform:uppercase;
+    text-shadow:0 0 30px rgba(212,175,55,.2);
+}
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+.hero p{
+    max-width:800px;
+    margin:auto;
+    color:#bcbcbc;
+    line-height:1.9;
+    font-size:1.2rem;
+}
+
+.hero-buttons{
+    margin-top:55px;
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.btn{
+    padding:18px 42px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:700;
+    transition:.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.btn-gold{
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:black;
+    box-shadow:0 10px 30px rgba(212,175,55,.3);
+}
+
+.btn-dark{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    color:white;
+    backdrop-filter:blur(20px);
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+}
+
+/* =========================
+SECTION
+========================= */
+
+section{
+    padding:140px 20px;
+}
+
+.container{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:90px;
+}
+
+.section-title h2{
+    font-size:clamp(2.5rem,6vw,5rem);
+    font-family:'Playfair Display',serif;
+    margin-bottom:25px;
+}
+
+.section-title p{
+    color:#aaa;
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+}
+
+/* =========================
+BENTO GRID
+========================= */
+
+.bento{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.bento-card{
+    min-height:280px;
+    border-radius:35px;
+    overflow:hidden;
+    position:relative;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.05);
+    padding:40px;
+    backdrop-filter:blur(20px);
+    transition:.5s;
+}
+
+.bento-card:hover{
+    transform:translateY(-10px);
+    border-color:rgba(212,175,55,.4);
+}
+
+.bento-card.large{
+    grid-column:span 2;
+    grid-row:span 2;
+}
+
+.bento-card img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+    opacity:.35;
+}
+
+.bento-card h3{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.bento-card p{
+    color:#c4c4c4;
+    line-height:1.8;
+}
+
+/* =========================
+PRICING
+========================= */
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.price-card{
+    border-radius:40px;
+    padding:60px 40px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    transition:.5s;
+}
+
+.price-card:hover{
+    transform:translateY(-10px);
+}
+
+.featured{
+    border:1px solid var(--gold);
+    transform:scale(1.03);
+}
+
+.price{
+    font-size:4rem;
+    font-weight:800;
+    margin:20px 0;
+    color:var(--gold);
+}
+
+.price-card ul{
+    list-style:none;
+    margin:30px 0;
+}
+
+.price-card li{
+    margin-bottom:15px;
+    color:#bbb;
+}
+
+/* =========================
+TESTIMONI
+========================= */
+
+.testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.testimonial{
+    padding:40px;
+    border-radius:35px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+}
+
+.testimonial p{
+    color:#bbb;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.testimonial h4{
+    color:var(--gold);
+}
+
+/* =========================
+FAQ
+========================= */
+
+.faq-item{
+    margin-bottom:20px;
+    border-radius:25px;
+    overflow:hidden;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.faq-question{
+    padding:28px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:.5s;
+    color:#bbb;
+    padding:0 28px;
+    line-height:1.8;
+}
+
+.faq-item.active .faq-answer{
+    max-height:300px;
+    padding:0 28px 28px;
+}
+
+/* =========================
+CTA
+========================= */
+
+.cta{
+    text-align:center;
+}
+
+.cta-box{
+    padding:100px 40px;
+    border-radius:50px;
+    background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.88)),
+    url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=2070&auto=format&fit=crop') center/cover;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.cta h2{
+    font-size:clamp(3rem,6vw,6rem);
+    margin-bottom:25px;
+    font-family:'Playfair Display',serif;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    padding:80px 20px;
+    text-align:center;
+    color:#666;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+/* =========================
+WHATSAPP
+========================= */
+
+.whatsapp{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:black;
+    font-size:1.7rem;
+    z-index:99999;
+    box-shadow:0 10px 40px rgba(212,175,55,.5);
+    transition:.4s;
+}
+
+.whatsapp:hover{
+    transform:scale(1.1);
+}
+
+/* =========================
+REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(80px);
+    filter:blur(10px);
+    transition:1.2s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .bento{
+        grid-template-columns:1fr;
+    }
+
+    .bento-card.large{
+        grid-column:auto;
+        grid-row:auto;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+    <!-- INTRO PNG -->
+<div class="intro">
+  <img src="LOGO4721.png" alt="Logo">
+</div>
+
+<div class="loader">
+    <h1>FAADHIL</h1>
+    <p>DIGITAL EXPERIENCE</p>
+</div>
+
+<div class="noise"></div>
+<div class="glow"></div>
+<div class="progress"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="nav-container">
+
+        <div class="logo">
+    <img src="LOGO4721.png" alt="Faadhil Digital">
+</div>
+
+        <div class="nav-links">
+            <a href="#services">Layanan</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#hours">Jam Kerja</a>
+            <a href="#pricing">Harga</a>
+            <a href="#faq">FAQ</a>
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content reveal">
+
+        <div class="badge">
+            ✦ PREMIUM WEB EXPERIENCE
+        </div>
+
+        <h1>
+            Build Your <span>Luxury</span><br>
+            Digital Presence
+        </h1>
+
+        <p>
+            Website modern dengan desain cinematic, performa cepat,
+            animasi premium, dan tampilan yang membuat bisnis Anda terlihat jauh lebih profesional.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="https://wa.me/6282317304798" class="btn btn-gold">
+                Mulai Sekarang
+            </a>
+
+            <a href="#portfolio" class="btn btn-dark">
+                Lihat Portfolio
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Layanan Eksklusif</h2>
+
+            <p>
+                Website modern dengan kualitas visual premium dan pengalaman terbaik.
+            </p>
+
+        </div>
+
+        <div class="bento">
+
+            <div class="bento-card large reveal">
+
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop">
+
+                <h3>Luxury Website</h3>
+
+                <p>
+                    Desain modern cinematic dengan animasi super smooth dan tampilan elegan.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Responsive</h3>
+
+                <p>
+                    Optimal di semua device dan tetap terlihat premium.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Fast Loading</h3>
+
+                <p>
+                    Website ringan, cepat, dan performa maksimal.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>SEO Ready</h3>
+
+                <p>
+                    Struktur modern agar lebih mudah ditemukan Google.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Premium Animation</h3>
+
+                <p>
+                    Smooth scrolling, reveal effect, dan parallax modern.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+
+<section id="portfolio">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Featured Works</h2>
+
+            <p>
+                Portfolio modern dengan kualitas agency internasional.
+            </p>
+
+        </div>
+
+        <div class="bento">
+
+            <div class="bento-card large reveal">
+
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop">
+
+                <h3>Creative Agency</h3>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop">
+
+                <h3>Startup Website</h3>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=2070&auto=format&fit=crop">
+
+                <h3>Luxury Brand</h3>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop">
+
+                <h3>Modern Company</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PRICING -->
+
+<section id="pricing">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Premium Pricing</h2>
+
+            <p>
+                Transparan, modern, dan sesuai kualitas premium.
+            </p>
+
+        </div>
+
+        <div class="pricing">
+
+            <div class="price-card reveal">
+
+                <h3>Basic</h3>
+
+                <div class="price">100rb</div>
+
+                <ul>
+                    <li>Landing Page</li>
+                    <li>Responsive</li>
+                    <li>WA Button</li>
+                    <li>1x Revisi</li>
+                </ul>
+
+                <a href="#" class="btn btn-dark">
+                    Pilih Paket
+                </a>
+
+            </div>
+
+            <div class="price-card featured reveal">
+
+                <h3>Business</h3>
+
+                <div class="price">450rb</div>
+
+                <ul>
+                    <li>5 Halaman</li>
+                    <li>SEO Basic</li>
+                    <li>Hosting 1 Tahun</li>
+                    <li>3x Revisi</li>
+                </ul>
+
+                <a href="#" class="btn btn-gold">
+                    Paling Populer
+                </a>
+
+            </div>
+
+            <div class="price-card reveal">
+
+                <h3>Premium</h3>
+
+                <div class="price">1jt</div>
+
+                <ul>
+                    <li>Unlimited Page</li>
+                    <li>Premium Animation</li>
+                    <li>Custom Design</li>
+                    <li>Unlimited Revisi</li>
+                </ul>
+
+                <a href="#" class="btn btn-dark">
+                    Pilih Paket
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- WORKING HOURS -->
+
+<section id="hours">
+    <div class="container">
+        <div class="section-title reveal">
+            <h2>Jam Kerja</h2>
+            <p>Ini jadwal aktif gue buat bales chat & ngerjain website</p>
+        </div>
+
+        <div class="bento">
+            <div class="bento-card reveal">
+                <h3>Senin</h3>
+                <p>Mulai kerja jam 16:30 WITA. Full bisa bales & revisi cepat.</p>
+            </div>
+
+            <div class="bento-card reveal">
+                <h3>Selasa</h3>
+                <p>16:30 - Maghrib bisa kerja. Ba'da Maghrib - Isya ada pengajian.</p>
+            </div>
+
+            <div class="bento-card reveal">
+                <h3>Rabu</h3>
+                <p>Mulai jam 16:30 WITA. Sore ada pengajian sampe jam 17:45. Malam Rabu free.</p>
+            </div>
+
+            <div class="bento-card reveal">
+                <h3>Kamis - Jumat</h3>
+                <p>Kamis full jadwal sampe malam. Jumat mulai 16:30, malam Jumat free.</p>
+            </div>
+
+            <div class="bento-card reveal">
+                <h3>Sabtu - Minggu</h3>
+                <p>Full free. Paling cepat bales & paling cepat jadi.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+
+<section id="faq">
+    <div class="container">
+        <div class="section-title reveal">
+            <h2>FAQ</h2>
+            <p>Pertanyaan yang paling sering ditanyakan client.</p>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Berapa lama pengerjaan website?</div>
+            <div class="faq-answer">
+                Paket Dasar 2-3 hari kerja, Paket Bisnis 5-7 hari kerja, Paket Premium 10-14 hari kerja. Tergantung seberapa cepat lu kirim materi dan revisi.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Apakah website mobile friendly?</div>
+            <div class="faq-answer">
+                Ya, semua website sudah 100% responsive dan optimal di HP, tablet, maupun desktop.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Apakah bisa revisi?</div>
+            <div class="faq-answer">
+                Bisa. Paket Dasar 1x revisi, Paket Bisnis 3x revisi, Paket Premium unlimited revisi selama 30 hari setelah jadi.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Kalau saya nggak bisa desain, gimana?</div>
+            <div class="faq-answer">
+                Tenang, lu tinggal kirim logo + foto + teks yang mau ditampilkan. Sisanya gue yang atur biar keliatan premium. Kalau bingung nulis, gue bantu bikinin draftnya juga.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Domain & hosting sudah termasuk?</div>
+            <div class="faq-answer">
+                Paket Dasar belum termasuk domain & hosting. Paket Bisnis & Premium udah include hosting 1 tahun. Domain bisa gue bantu beliin juga, harganya mulai 150rb/tahun.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Gimana cara bayarnya? Aman nggak?</div>
+            <div class="faq-answer">
+                Aman. Sistem DP 50% di awal, 50% lagi pas website udah jadi dan lu udah cek. Bisa transfer BCA/BRI, DANA, OVO. Nggak ada istilah transfer full di awal.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Bisa dipasangin Google Maps, IG, WA, Shopee?</div>
+            <div class="faq-answer">
+                Bisa semua. Paket Dasar udah include tombol WA + Maps. Paket Bisnis & Premium bisa gue sambungin ke IG, TikTok, Shopee, Tokped, atau sistem apapun yang lu pakai.
+            </div>
+        </div>
+
+        <div class="faq-item reveal">
+    <div class="faq-question">Kapan jam kerja lu? Kalau chat malam bisa dibales?</div>
+    <div class="faq-answer">
+        Gue kerja mulai jam 16:30 WITA. Selasa ada pengajian Ba'da Maghrib - Isya. Rabu mulai 17:45 karena pengajian sore. Kamis full jadwal sampe malam. Malam Rabu & Jumat juga full ada acara. Sabtu Minggu paling free. Chat masuk di luar jam itu bakal gue bales pas udah mulai kerja.
+    </div>
+</div>
+
+        <div class="faq-item reveal">
+            <div class="faq-question">Apakah ada garansi kalau ada error?</div>
+            <div class="faq-answer">
+                Ada. Garansi 30 hari penuh buat perbaikan bug atau error teknis. Kalau masalahnya dari gue, gue benerin gratis. Kalau mau update konten baru, itu beda lagi ya.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-box reveal">
+
+            <h2>
+                Ready To Build <br>
+                Something Premium?
+            </h2>
+
+            <a href="https://wa.me/6282317304798" class="btn btn-gold">
+                Contact Now
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Faadhil Digital — Super Premium Experience
+</footer>
+
+<a href="https://wa.me/6282317304798" class="whatsapp">
+✦
+</a>
+
+<script>
+
+/* =========================
+LOADER
+========================= */
+
+window.addEventListener('load',()=>{
+
+    setTimeout(()=>{
+
+        document.querySelector('.loader')
+        .classList.add('hide');
+
+    },1500);
+
+});
+
+/* =========================
+CURSOR GLOW
+========================= */
+
+const glow = document.querySelector('.glow');
+
+window.addEventListener('mousemove',(e)=>{
+
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+
+});
+
+/* =========================
+REVEAL
+========================= */
+
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('active');
+
+        }
+
+    });
+
+},{
+    threshold:.1
+});
+
+reveals.forEach(el=>observer.observe(el));
+
+/* =========================
+FAQ
+========================= */
+
+const faqItems =
+document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item=>{
+
+    item.addEventListener('click',()=>{
+
+        item.classList.toggle('active');
+
+    });
+
+});
+
+/* =========================
+PROGRESS BAR
+========================= */
+
+window.addEventListener('scroll',()=>{
+
+    const progress =
+    (window.scrollY /
+    (document.body.scrollHeight -
+    window.innerHeight)) * 100;
+
+    document.querySelector('.progress')
+    .style.width = progress + '%';
+
+});
+
+</script>
+
+</body>
+</html>
