@@ -609,6 +609,72 @@ MOBILE
 
 }
 
+/* =========================
+HASIL KERJA
+========================= */
+
+#works .bento-card{
+    min-height:320px;
+}
+
+#works .bento-card.large{
+    position:relative;
+    overflow:hidden;
+}
+
+#works .bento-card.large::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.88),
+        rgba(0,0,0,.25)
+    );
+    z-index:1;
+}
+
+#works .bento-card.large > div{
+    position:relative;
+    z-index:2;
+}
+
+#works .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* =========================
+ABOUT
+========================= */
+
+#about .bento-card.large{
+    position:relative;
+    overflow:hidden;
+}
+
+#about .bento-card.large::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.88),
+        rgba(0,0,0,.35)
+    );
+    z-index:1;
+}
+
+#about .bento-card.large > div{
+    position:relative;
+    z-index:2;
+}
+
+#about h3{
+    line-height:1.2;
+}
+
 </style>
 </head>
 <body>
@@ -639,7 +705,9 @@ MOBILE
 
         <div class="nav-links">
             <a href="#services">Layanan</a>
+            <a href="#about">About</a>
             <a href="#portfolio">Portfolio</a>
+            <a href="#works">Hasil Kerja</a>
             <a href="#hours">Jam Kerja</a>
             <a href="#pricing">Harga</a>
             <a href="#faq">FAQ</a>
@@ -761,6 +829,118 @@ MOBILE
 
 </section>
 
+<!-- ABOUT US -->
+
+<section id="about">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>About Faadhil Digital</h2>
+
+            <p>
+                Bukan sekadar bikin website, tapi membantu bisnis tampil
+                lebih profesional dan dipercaya pelanggan.
+            </p>
+
+        </div>
+
+        <div class="bento">
+
+            <!-- LEFT -->
+
+            <div class="bento-card large reveal">
+
+                <img
+                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2070&auto=format&fit=crop"
+                alt="Faadhil Digital">
+
+                <div style="position:relative;z-index:2;">
+
+                    <div class="badge"
+                    style="margin-bottom:20px;">
+                        ✦ ABOUT US
+                    </div>
+
+                    <h3>
+                        Membangun Website
+                        Yang Terlihat Mahal
+                        & Profesional
+                    </h3>
+
+                    <p style="margin-top:20px;line-height:1.9;">
+                        Faadhil Digital fokus membuat website modern
+                        dengan tampilan premium, loading cepat,
+                        dan pengalaman pengguna yang nyaman.
+                        Cocok untuk UMKM, toko bangunan,
+                        bisnis lokal, personal branding,
+                        hingga company profile.
+                    </p>
+
+                    <p style="margin-top:18px;line-height:1.9;">
+                        Setiap website dibuat dengan desain custom,
+                        responsive di semua device,
+                        dan dirancang supaya bisnis terlihat
+                        lebih terpercaya di mata pelanggan.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="bento-card reveal">
+
+                <h3>Modern Design</h3>
+
+                <p>
+                    Desain clean, elegan, dan mengikuti
+                    standar website modern saat ini.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Fast Response</h3>
+
+                <p>
+                    Komunikasi cepat dan pengerjaan jelas
+                    dari awal sampai website selesai.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Custom Website</h3>
+
+                <p>
+                    Semua website dibuat sesuai kebutuhan
+                    bisnis dan identitas brand client.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Trusted Service</h3>
+
+                <p>
+                    Fokus pada kualitas, kenyamanan client,
+                    dan hasil akhir yang profesional.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 <!-- PORTFOLIO -->
 
 <section id="portfolio">
@@ -808,6 +988,113 @@ MOBILE
                 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop">
 
                 <h3>Modern Company</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- HASIL KERJA -->
+
+<section id="works">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <h2>Hasil Kerjaan</h2>
+
+            <p>
+                Beberapa project website modern yang sudah saya kerjakan
+                untuk bisnis dan toko lokal.
+            </p>
+
+        </div>
+
+        <div class="bento">
+
+            <!-- PROJECT 1 -->
+
+            <div class="bento-card large reveal">
+
+                <img
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+                alt="Nagara Store">
+
+                <div style="position:relative;z-index:2;">
+
+                    <div class="badge"
+                    style="margin-bottom:18px;">
+                        ✦ LIVE PROJECT
+                    </div>
+
+                    <h3>Nagara Store</h3>
+
+                    <p style="margin-bottom:25px;">
+                        Website toko bahan bangunan premium
+                        dengan admin panel realtime, kategori produk,
+                        keranjang belanja, dan checkout WhatsApp.
+                    </p>
+
+                    <a
+                    href="https://nagara-store2.vercel.app/"
+                    target="_blank"
+                    class="btn btn-gold">
+
+                        Kunjungi Website
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- FEATURE -->
+
+            <div class="bento-card reveal">
+
+                <h3>Realtime Admin</h3>
+
+                <p>
+                    Tambah produk, edit harga,
+                    ubah stok, dan sinkron realtime.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Premium UI</h3>
+
+                <p>
+                    Desain modern dengan tampilan
+                    cinematic dan animasi smooth.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Mobile Friendly</h3>
+
+                <p>
+                    Optimal di HP, tablet,
+                    dan desktop.
+                </p>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Fast Performance</h3>
+
+                <p>
+                    Loading cepat dengan
+                    struktur website modern.
+                </p>
 
             </div>
 
