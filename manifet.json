@@ -1,0 +1,47 @@
+{
+  "name": "Faadhil Digital",
+  "short_name": "Faadhil",
+  "description": "Jasa Pembuatan Website Profesional — Landing Page, Company Profile, Toko Online",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#030305",
+  "background_color": "#030305",
+  "lang": "id",
+  "scope": "/",
+  "categories": [
+    "business",
+    "design"
+  ],
+  "icons": [
+    {
+      "src": "assets/LOGO4721.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/LOGO4721.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Lihat Harga",
+      "url": "/#harga",
+      "description": "Paket harga website"
+    },
+    {
+      "name": "Order Sekarang",
+      "url": "https://wa.me/6282317304798",
+      "description": "Chat WhatsApp"
+    },
+    {
+      "name": "Portofolio",
+      "url": "/#hasil",
+      "description": "Hasil kerja kami"
+    }
+  ]
+}

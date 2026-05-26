@@ -1,1421 +1,757 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Faadhil Digital — Super Premium Agency</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.16/dist/lenis.min.js"></script>
-
-<style>
-
-:root{
-    --gold:#d4af37;
-    --gold2:#ffdf73;
-    --dark:#050505;
-    --soft:#111111;
-    --text:#f2f2f2;
-    --gray:#9e9e9e;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
-}
-
-html,body{
-    overflow-x:hidden;
-    background:#050505;
-    font-family:'Montserrat',sans-serif;
-    color:var(--text);
-}
-
-/* =========================
-BACKGROUND
-========================= */
-
-body::before{
-    content:'';
-    position:fixed;
-    inset:0;
-    background:
-    linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.94)),
-    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') center/cover;
-    z-index:-4;
-}
-
-.noise{
-    position:fixed;
-    inset:0;
-    opacity:.03;
-    background:url('https://grainy-gradients.vercel.app/noise.svg');
-    z-index:-3;
-    pointer-events:none;
-}
-
-.glow{
-    position:fixed;
-    width:700px;
-    height:700px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(212,175,55,.15),transparent 70%);
-    pointer-events:none;
-    transform:translate(-50%,-50%);
-    z-index:-2;
-}
-
-/* =========================
-LOADER
-========================= */
-
-.loader{
-    position:fixed;
-    inset:0;
-    background:#000;
-    z-index:99999;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    transition:1s;
-}
-
-.loader h1{
-    font-size:4rem;
-    color:var(--gold);
-    letter-spacing:6px;
-    font-family:'Playfair Display',serif;
-}
-
-.loader p{
-    margin-top:15px;
-    color:#777;
-    letter-spacing:4px;
-}
-
-.loader.hide{
-    opacity:0;
-    visibility:hidden;
-}
-
-/* =========================
-SCROLL BAR
-========================= */
-
-.progress{
-    position:fixed;
-    top:0;
-    left:0;
-    width:0%;
-    height:3px;
-    background:linear-gradient(90deg,var(--gold),var(--gold2));
-    z-index:999999;
-    box-shadow:0 0 20px rgba(212,175,55,.8);
-}
-
-/* =========================
-NAVBAR
-========================= */
-
-nav{
-    position:fixed;
-    top:0;
-    width:100%;
-    z-index:9999;
-    padding:22px 0;
-    backdrop-filter:blur(20px);
-    background:rgba(0,0,0,.35);
-    border-bottom:1px solid rgba(255,255,255,.04);
-}
-
-.nav-container{
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:1.8rem;
-    font-weight:800;
-    letter-spacing:3px;
-}
-
-.logo span{
-    color:var(--gold);
-}
-
-.nav-links{
-    display:flex;
-    gap:40px;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#ccc;
-    font-size:.95rem;
-    transition:.4s;
-    position:relative;
-}
-
-.nav-links a::after{
-    content:'';
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:0%;
-    height:2px;
-    background:var(--gold);
-    transition:.4s;
-}
-
-.nav-links a:hover{
-    color:white;
-}
-
-.nav-links a:hover::after{
-    width:100%;
-}
-
-/* =========================
-INTRO PNG
-========================= */
-
-.intro{
-    position:fixed;
-    inset:0;
-    background:#000;
-    z-index:999;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    animation:fadeOutIntro 1s ease 2.5s forwards;
-}
-
-.intro img{
-    max-width:500px;
-    width:80%;
-    opacity:0;
-    transform:scale(0.9);
-    animation:fadeInUp 1s ease 0.3s forwards;
-}
-
-@keyframes fadeInUp{
-    to{ opacity:1; transform:scale(1); }
-}
-
-@keyframes fadeOutIntro{
-    to{ opacity:0; visibility:hidden; }
-}
-
-.logo img{
-    height: 80px;
-    width:auto;
-    display:block;
-}
-
-/* =========================
-HERO
-========================= */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-    padding:180px 20px 100px;
-}
-
-.hero-content{
-    max-width:1100px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 28px;
-    border-radius:999px;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(20px);
-    color:var(--gold);
-    margin-bottom:35px;
-}
-
-.hero h1{
-    font-size:clamp(3.5rem,8vw,8rem);
-    line-height:.95;
-    margin-bottom:35px;
-    font-family:'Playfair Display',serif;
-    text-transform:uppercase;
-    text-shadow:0 0 30px rgba(212,175,55,.2);
-}
-
-.hero h1 span{
-    color:var(--gold);
-}
-
-.hero p{
-    max-width:800px;
-    margin:auto;
-    color:#bcbcbc;
-    line-height:1.9;
-    font-size:1.2rem;
-}
-
-.hero-buttons{
-    margin-top:55px;
-    display:flex;
-    gap:20px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-/* =========================
-BUTTONS
-========================= */
-
-.btn{
-    padding:18px 42px;
-    border-radius:999px;
-    text-decoration:none;
-    font-weight:700;
-    transition:.4s;
-    position:relative;
-    overflow:hidden;
-}
-
-.btn-gold{
-    background:linear-gradient(135deg,var(--gold),var(--gold2));
-    color:black;
-    box-shadow:0 10px 30px rgba(212,175,55,.3);
-}
-
-.btn-dark{
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.08);
-    color:white;
-    backdrop-filter:blur(20px);
-}
-
-.btn:hover{
-    transform:translateY(-5px);
-}
-
-/* =========================
-SECTION
-========================= */
-
-section{
-    padding:140px 20px;
-}
-
-.container{
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:90px;
-}
-
-.section-title h2{
-    font-size:clamp(2.5rem,6vw,5rem);
-    font-family:'Playfair Display',serif;
-    margin-bottom:25px;
-}
-
-.section-title p{
-    color:#aaa;
-    max-width:700px;
-    margin:auto;
-    line-height:1.8;
-}
-
-/* =========================
-BENTO GRID
-========================= */
-
-.bento{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
-}
-
-.bento-card{
-    min-height:280px;
-    border-radius:35px;
-    overflow:hidden;
-    position:relative;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.05);
-    padding:40px;
-    backdrop-filter:blur(20px);
-    transition:.5s;
-}
-
-.bento-card:hover{
-    transform:translateY(-10px);
-    border-color:rgba(212,175,55,.4);
-}
-
-.bento-card.large{
-    grid-column:span 2;
-    grid-row:span 2;
-}
-
-.bento-card img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-1;
-    opacity:.35;
-}
-
-.bento-card h3{
-    font-size:2rem;
-    margin-bottom:15px;
-}
-
-.bento-card p{
-    color:#c4c4c4;
-    line-height:1.8;
-}
-
-/* =========================
-PRICING
-========================= */
-
-.pricing{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:30px;
-}
-
-.price-card{
-    border-radius:40px;
-    padding:60px 40px;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.05);
-    backdrop-filter:blur(20px);
-    transition:.5s;
-}
-
-.price-card:hover{
-    transform:translateY(-10px);
-}
-
-.featured{
-    border:1px solid var(--gold);
-    transform:scale(1.03);
-}
-
-.price{
-    font-size:4rem;
-    font-weight:800;
-    margin:20px 0;
-    color:var(--gold);
-}
-
-.price-card ul{
-    list-style:none;
-    margin:30px 0;
-}
-
-.price-card li{
-    margin-bottom:15px;
-    color:#bbb;
-}
-
-/* =========================
-TESTIMONI
-========================= */
-
-.testimonial-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:30px;
-}
-
-.testimonial{
-    padding:40px;
-    border-radius:35px;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.05);
-    backdrop-filter:blur(20px);
-}
-
-.testimonial p{
-    color:#bbb;
-    line-height:1.8;
-    margin-bottom:20px;
-}
-
-.testimonial h4{
-    color:var(--gold);
-}
-
-/* =========================
-FAQ
-========================= */
-
-.faq-item{
-    margin-bottom:20px;
-    border-radius:25px;
-    overflow:hidden;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.05);
-}
-
-.faq-question{
-    padding:28px;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.faq-answer{
-    max-height:0;
-    overflow:hidden;
-    transition:.5s;
-    color:#bbb;
-    padding:0 28px;
-    line-height:1.8;
-}
-
-.faq-item.active .faq-answer{
-    max-height:300px;
-    padding:0 28px 28px;
-}
-
-/* =========================
-CTA
-========================= */
-
-.cta{
-    text-align:center;
-}
-
-.cta-box{
-    padding:100px 40px;
-    border-radius:50px;
-    background:
-    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.88)),
-    url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=2070&auto=format&fit=crop') center/cover;
-    border:1px solid rgba(255,255,255,.05);
-}
-
-.cta h2{
-    font-size:clamp(3rem,6vw,6rem);
-    margin-bottom:25px;
-    font-family:'Playfair Display',serif;
-}
-
-/* =========================
-FOOTER
-========================= */
-
-footer{
-    padding:80px 20px;
-    text-align:center;
-    color:#666;
-    border-top:1px solid rgba(255,255,255,.05);
-}
-
-/* =========================
-WHATSAPP
-========================= */
-
-.whatsapp{
-    position:fixed;
-    right:25px;
-    bottom:25px;
-    width:75px;
-    height:75px;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--gold),var(--gold2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    color:black;
-    font-size:1.7rem;
-    z-index:99999;
-    box-shadow:0 10px 40px rgba(212,175,55,.5);
-    transition:.4s;
-}
-
-.whatsapp:hover{
-    transform:scale(1.1);
-}
-
-/* =========================
-REVEAL
-========================= */
-
-.reveal{
-    opacity:0;
-    transform:translateY(80px);
-    filter:blur(10px);
-    transition:1.2s cubic-bezier(.16,1,.3,1);
-}
-
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-    filter:blur(0);
-}
-
-/* =========================
-MOBILE
-========================= */
-
-@media(max-width:900px){
-
-    .bento{
-        grid-template-columns:1fr;
-    }
-
-    .bento-card.large{
-        grid-column:auto;
-        grid-row:auto;
-    }
-
-    .nav-links{
-        display:none;
-    }
-
-    .hero-buttons{
-        flex-direction:column;
-    }
-
-    .btn{
-        width:100%;
-    }
-
-}
-
-/* =========================
-HASIL KERJA
-========================= */
-
-#works .bento-card{
-    min-height:320px;
-}
-
-#works .bento-card.large{
-    position:relative;
-    overflow:hidden;
-}
-
-#works .bento-card.large::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.88),
-        rgba(0,0,0,.25)
-    );
-    z-index:1;
-}
-
-#works .bento-card.large > div{
-    position:relative;
-    z-index:2;
-}
-
-#works .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-}
-
-/* =========================
-ABOUT
-========================= */
-
-#about .bento-card.large{
-    position:relative;
-    overflow:hidden;
-}
-
-#about .bento-card.large::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.88),
-        rgba(0,0,0,.35)
-    );
-    z-index:1;
-}
-
-#about .bento-card.large > div{
-    position:relative;
-    z-index:2;
-}
-
-#about h3{
-    line-height:1.2;
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#030305" />
+  <meta name="description" content="Faadhil Digital — Jasa Pembuatan Website Profesional. Landing page, company profile, toko online. Harga mulai Rp 200.000." />
+  <title>Faadhil Digital — Jasa Website Profesional</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="assets/LOGO4721.png" />
+  <link rel="apple-touch-icon" href="assets/LOGO4721.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <!-- INTRO PNG -->
-<div class="intro">
-  <img src="LOGO4721.png" alt="Logo">
-</div>
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
 
-<div class="loader">
-    <h1>FAADHIL</h1>
-    <p>DIGITAL EXPERIENCE</p>
-</div>
+  <!-- Noise layer -->
+  <div class="noise"></div>
 
-<div class="noise"></div>
-<div class="glow"></div>
-<div class="progress"></div>
+  <!-- ═══ FLOATING WHATSAPP ═══ -->
+  <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20konsultasi%20pembuatan%20website%20🙏" target="_blank" rel="noopener noreferrer" class="wa-float" id="waFloat" aria-label="Chat WhatsApp">
+    <div class="wa-pulse"></div>
+    <svg class="wa-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.826 6.508L4 29l7.697-1.804A12.93 12.93 0 0016 28c6.627 0 12-5.373 12-12S22.627 3 16 3z" fill="#fff" fill-opacity=".15" stroke="#fff" stroke-width="1.5"/>
+      <path d="M21.5 18.5c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.8-1.48-1.78-1.66-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z" fill="#fff"/>
+    </svg>
+    <span class="wa-label">Chat Sekarang</span>
+  </a>
 
-<!-- NAVBAR -->
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-brand">
+      <img src="assets/LOGO4721.png" alt="Faadhil Digital" class="nav-logo" />
+      <span class="nav-name">Faadhil<em>Digital</em></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#layanan" class="nl">Layanan</a></li>
+      <li><a href="#hasil" class="nl">Hasil Kerja</a></li>
+      <li><a href="#harga" class="nl">Harga</a></li>
+      <li><a href="#about" class="nl">About</a></li>
+      <li><a href="#faq" class="nl">FAQ</a></li>
+    </ul>
+    <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20order%20website" target="_blank" class="nav-cta">Order Sekarang ↗</a>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-<nav>
+  <!-- Mobile Menu -->
+  <div class="mob" id="mob">
+    <a href="#layanan" class="mob-a">Layanan</a>
+    <a href="#hasil" class="mob-a">Hasil Kerja</a>
+    <a href="#harga" class="mob-a">Harga</a>
+    <a href="#about" class="mob-a">About</a>
+    <a href="#faq" class="mob-a">FAQ</a>
+    <a href="https://wa.me/6282317304798" target="_blank" class="mob-a mob-wa">WhatsApp ↗</a>
+  </div>
 
-    <div class="nav-container">
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+    <div class="hero-orb o3"></div>
 
-        <div class="logo">
-    <img src="LOGO4721.png" alt="Faadhil Digital">
-</div>
+    <div class="hero-inner">
+      <div class="hero-pill rv" style="--d:.0s">
+        <span class="dot-pulse"></span>
+        Baru Buka — Harga Spesial Tersedia
+      </div>
 
-        <div class="nav-links">
-            <a href="#services">Layanan</a>
+      <h1 class="hero-h1">
+        <span class="hl rv" style="--d:.08s">Website</span>
+        <span class="hl hl-em rv" style="--d:.16s">Profesional</span>
+        <span class="hl rv" style="--d:.24s">Untuk Bisnis</span>
+        <span class="hl hl-gold rv" style="--d:.32s">Indonesia</span>
+      </h1>
+
+      <p class="hero-p rv" style="--d:.42s">
+        Faadhil Digital hadir membantu bisnis Anda tampil elegan dan terpercaya di dunia digital. Dari landing page hingga toko online — kami kerjakan dengan sepenuh hati.
+      </p>
+
+      <div class="hero-acts rv" style="--d:.52s">
+        <a href="#harga" class="btn-prim">
+          Lihat Paket Harga
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#hasil" class="btn-ghost">Lihat Hasil Kerja</a>
+      </div>
+
+      <div class="hero-pills rv" style="--d:.62s">
+        <div class="hp"><span class="chk">✓</span> Revisi Unlimited</div>
+        <div class="hp-sep">·</div>
+        <div class="hp"><span class="chk">✓</span> Mobile Responsif</div>
+        <div class="hp-sep">·</div>
+        <div class="hp"><span class="chk">✓</span> Selesai 3–7 Hari</div>
+        <div class="hp-sep">·</div>
+        <div class="hp"><span class="chk">✓</span> Harga Transparan</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ TICKER ═══ -->
+  <div class="ticker">
+    <div class="tick-track">
+      <span>Landing Page</span><b>✦</b>
+      <span>Company Profile</span><b>✦</b>
+      <span>Toko Online</span><b>✦</b>
+      <span>Portfolio</span><b>✦</b>
+      <span>Blog Profesional</span><b>✦</b>
+      <span>Booking System</span><b>✦</b>
+      <span>UMKM Website</span><b>✦</b>
+      <span>Personal Branding</span><b>✦</b>
+      <span>Landing Page</span><b>✦</b>
+      <span>Company Profile</span><b>✦</b>
+      <span>Toko Online</span><b>✦</b>
+      <span>Portfolio</span><b>✦</b>
+      <span>Blog Profesional</span><b>✦</b>
+      <span>Booking System</span><b>✦</b>
+      <span>UMKM Website</span><b>✦</b>
+      <span>Personal Branding</span><b>✦</b>
+    </div>
+  </div>
+
+  <!-- ═══ LAYANAN ═══ -->
+  <section class="sec" id="layanan">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">Yang Kami Kerjakan</p>
+        <h2 class="stitle rv">Jenis Website<br/><em>Yang Kami Buat</em></h2>
+        <p class="ssub rv" style="--d:.1s">Berbagai kebutuhan digital Anda kami tangani dengan desain yang serius dan hasil yang memuaskan.</p>
+      </div>
+
+      <div class="lyr-grid">
+        <div class="lyr-card rv" style="--d:0s">
+          <div class="lyr-ico">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="2" y="3" width="22" height="17" rx="2" stroke="var(--gd)" stroke-width="1.4"/><path d="M2 8h22" stroke="var(--gd)" stroke-width="1.4"/><path d="M7 3v5M19 3v5" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Landing Page</h3>
+          <p>Satu halaman kuat untuk produk, promo, atau layanan Anda. Desain menarik dengan CTA yang mengkonversi.</p>
+          <div class="lyr-tags"><span>Promo</span><span>Produk</span><span>Event</span></div>
+        </div>
+
+        <div class="lyr-card rv" style="--d:.07s">
+          <div class="lyr-ico">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2L2 7v6c0 5 4.2 9.7 11 11 6.8-1.3 11-6 11-11V7L13 2z" stroke="var(--gd)" stroke-width="1.4"/><path d="M8 13l3 3 7-7" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Company Profile</h3>
+          <p>Tampilkan kredibilitas bisnis Anda secara profesional. Klien akan lebih percaya melihat bisnis Anda online.</p>
+          <div class="lyr-tags"><span>Bisnis</span><span>Perusahaan</span></div>
+        </div>
+
+        <div class="lyr-card rv" style="--d:.14s">
+          <div class="lyr-ico">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 3h20v16H3z" stroke="var(--gd)" stroke-width="1.4"/><path d="M8 19l-2 4M18 19l2 4M5 23h16" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/><path d="M9 11h8M13 8v6" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Toko Online</h3>
+          <p>E-commerce lengkap dengan katalog produk, keranjang belanja, dan koneksi ke metode pembayaran populer.</p>
+          <div class="lyr-tags"><span>E-Commerce</span><span>Katalog</span></div>
+        </div>
+
+        <div class="lyr-card rv" style="--d:.21s">
+          <div class="lyr-ico">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="9" r="5" stroke="var(--gd)" stroke-width="1.4"/><path d="M3 23c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Portfolio & Personal</h3>
+          <p>Showcase karya dan keahlian Anda. Cocok untuk freelancer, desainer, fotografer, dan kreator konten.</p>
+          <div class="lyr-tags"><span>Freelancer</span><span>Kreator</span></div>
+        </div>
+
+        <div class="lyr-card rv" style="--d:.28s">
+          <div class="lyr-ico">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 5h20M3 11h14M3 17h10" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/><circle cx="21" cy="19" r="4" stroke="var(--gd)" stroke-width="1.4"/><path d="M24 22l2 2" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Blog Profesional</h3>
+          <p>Platform konten SEO-friendly untuk membangun otoritas di niche Anda dan mendatangkan traffic organik.</p>
+          <div class="lyr-tags"><span>Konten</span><span>SEO</span></div>
+        </div>
+
+        <div class="lyr-card rv" style="--d:.35s">
+          <div class="lyr-ico">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="2" y="2" width="9" height="9" rx="1.5" stroke="var(--gd)" stroke-width="1.4"/><rect x="15" y="2" width="9" height="9" rx="1.5" stroke="var(--gd)" stroke-width="1.4"/><rect x="2" y="15" width="9" height="9" rx="1.5" stroke="var(--gd)" stroke-width="1.4"/><rect x="15" y="15" width="9" height="9" rx="1.5" stroke="var(--gd)" stroke-width="1.4"/></svg>
+          </div>
+          <h3>UMKM & Warung Digital</h3>
+          <p>Website simpel tapi berkesan untuk usaha kecil menengah. Bantu pelanggan temukan bisnis Anda secara online.</p>
+          <div class="lyr-tags"><span>UMKM</span><span>Lokal</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HASIL KERJA ═══ -->
+  <section class="sec sec-dark" id="hasil">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">Portofolio</p>
+        <h2 class="stitle rv">Hasil Kerja<br/><em>Yang Nyata</em></h2>
+        <p class="ssub rv" style="--d:.1s">Website yang sudah kami bangun — bukan mockup, tapi benar-benar live dan bisa dikunjungi.</p>
+      </div>
+
+      <div class="hasil-grid">
+        <div class="hasil-card rv" style="--d:0s">
+          <div class="hasil-thumb">
+            <div class="hasil-preview">
+              <div class="preview-bar">
+                <span class="pb-dot"></span><span class="pb-dot"></span><span class="pb-dot"></span>
+                <span class="pb-url">nagara-store2.vercel.app</span>
+              </div>
+              <div class="preview-screen nagara-screen">
+                <div class="ns-header">
+                  <div class="ns-logo"></div>
+                  <div class="ns-nav"><span></span><span></span><span></span></div>
+                </div>
+                <div class="ns-hero">
+                  <div class="ns-title"></div>
+                  <div class="ns-sub"></div>
+                  <div class="ns-btn"></div>
+                </div>
+                <div class="ns-cards">
+                  <div class="ns-card"></div>
+                  <div class="ns-card"></div>
+                  <div class="ns-card"></div>
+                </div>
+              </div>
+            </div>
+            <div class="hasil-overlay">
+              <a href="https://nagara-store2.vercel.app/" target="_blank" rel="noopener noreferrer" class="hasil-visit">
+                Kunjungi Website
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="hasil-info">
+            <div class="hasil-meta">
+              <span class="hasil-cat">E-Commerce · Toko Online</span>
+              <span class="hasil-year">2025</span>
+            </div>
+            <h3 class="hasil-name">Nagara Store</h3>
+            <p class="hasil-desc">Toko online modern dengan tampilan elegan, katalog produk lengkap, dan pengalaman belanja yang mulus.</p>
+            <a href="https://nagara-store2.vercel.app/" target="_blank" rel="noopener noreferrer" class="hasil-link">
+              nagara-store2.vercel.app ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Coming Soon cards -->
+        <div class="hasil-card hasil-soon rv" style="--d:.15s">
+          <div class="hasil-thumb">
+            <div class="hasil-preview soon-preview">
+              <div class="soon-inner">
+                <div class="soon-icon">✦</div>
+                <span>Segera Hadir</span>
+              </div>
+            </div>
+          </div>
+          <div class="hasil-info">
+            <div class="hasil-meta">
+              <span class="hasil-cat">Company Profile</span>
+              <span class="hasil-year">Soon</span>
+            </div>
+            <h3 class="hasil-name">Project Berikutnya</h3>
+            <p class="hasil-desc">Mau website Anda jadi karya kami selanjutnya? Hubungi kami sekarang.</p>
+            <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20order%20website" target="_blank" class="hasil-link gold-link">
+              Jadilah Client Kami →
+            </a>
+          </div>
+        </div>
+
+        <div class="hasil-card hasil-soon rv" style="--d:.25s">
+          <div class="hasil-thumb">
+            <div class="hasil-preview soon-preview">
+              <div class="soon-inner">
+                <div class="soon-icon">✦</div>
+                <span>Segera Hadir</span>
+              </div>
+            </div>
+          </div>
+          <div class="hasil-info">
+            <div class="hasil-meta">
+              <span class="hasil-cat">Landing Page</span>
+              <span class="hasil-year">Soon</span>
+            </div>
+            <h3 class="hasil-name">Slot Terbuka</h3>
+            <p class="hasil-desc">Portofolio kami sedang bertumbuh. Jadilah bagian dari perjalanan awal Faadhil Digital.</p>
+            <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20order%20website" target="_blank" class="hasil-link gold-link">
+              Hubungi Kami →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY US ═══ -->
+  <section class="sec" id="whyus">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">Kenapa Kami</p>
+        <h2 class="stitle rv">Alasan Memilih<br/><em>Faadhil Digital</em></h2>
+        <p class="ssub rv" style="--d:.1s">Kami baru, tapi kami serius. Dan karena kami baru, Anda mendapat harga terbaik dengan kualitas yang tidak main-main.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card rv" style="--d:0s">
+          <div class="why-num">01</div>
+          <div class="why-ico">◈</div>
+          <h3>Desain 100% Custom</h3>
+          <p>Bukan template drag-and-drop. Setiap website kami rancang dari nol sesuai identitas brand Anda — unik, berkarakter, tidak generik.</p>
+        </div>
+        <div class="why-card rv" style="--d:.1s">
+          <div class="why-num">02</div>
+          <div class="why-ico">◉</div>
+          <h3>Harga Jujur & Transparan</h3>
+          <p>Tidak ada biaya tersembunyi. Harga yang kami tampilkan adalah harga yang Anda bayar. Cocok untuk bisnis yang baru merintis.</p>
+        </div>
+        <div class="why-card rv" style="--d:.2s">
+          <div class="why-num">03</div>
+          <div class="why-ico">◌</div>
+          <h3>Komunikasi Langsung</h3>
+          <p>Tidak lewat banyak layer admin. Anda berbicara langsung dengan developer yang mengerjakan project Anda — cepat dan transparan.</p>
+        </div>
+        <div class="why-card rv" style="--d:.3s">
+          <div class="why-num">04</div>
+          <div class="why-ico">◍</div>
+          <h3>Mobile-First Responsif</h3>
+          <p>Lebih dari 70% pengguna browsing lewat HP. Website kami tampil sempurna di semua ukuran layar, dari mobile hingga desktop.</p>
+        </div>
+        <div class="why-card rv" style="--d:.4s">
+          <div class="why-num">05</div>
+          <div class="why-ico">◎</div>
+          <h3>Revisi Sampai Puas</h3>
+          <p>Kami tidak serahkan website sebelum Anda benar-benar puas. Revisi tersedia selama proses pengerjaan hingga serah terima.</p>
+        </div>
+        <div class="why-card rv" style="--d:.5s">
+          <div class="why-num">06</div>
+          <div class="why-ico">⬡</div>
+          <h3>SEO-Friendly dari Hari 1</h3>
+          <p>Struktur HTML semantik, meta tag lengkap, dan loading cepat. Website Anda lebih mudah ditemukan di Google sejak hari pertama live.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT US + FOTO ═══ -->
+  <section class="sec sec-dark" id="about">
+    <div class="con">
+      <div class="about-grid">
+        <div class="about-img rv">
+          <div class="foto-wrap">
+            <img src="assets/foto1.png" alt="Developer Faadhil Digital sedang coding" class="foto" />
+            <div class="foto-badge-tl">
+              <span class="b-dot green"></span>
+              <span>Sedang Online</span>
+            </div>
+            <div class="foto-badge-br">
+              <span class="b-big">&lt; 1</span>
+              <span class="b-sm">Bulan<br/>Berdiri</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-text">
+          <p class="stag rv">Tentang Kami</p>
+          <h2 class="stitle rv">Baru, Tapi Kami<br/><em>Tidak Main-Main</em></h2>
+          <p class="ap rv" style="--d:.1s">
+            Faadhil Digital adalah studio jasa pembuatan website yang baru lahir — tapi lahir dengan tekad yang besar. Kami hadir karena percaya bahwa setiap bisnis Indonesia, sekecil apapun, berhak punya kehadiran digital yang layak dan profesional.
+          </p>
+          <p class="ap rv" style="--d:.2s">
+            Karena kami masih baru, kami menawarkan harga yang sangat terjangkau — jauh di bawah agensi besar — tanpa mengorbankan kualitas. Setiap pixel, setiap baris kode, dikerjakan dengan penuh perhatian.
+          </p>
+          <p class="ap rv" style="--d:.3s">
+            Misi kami: <strong class="gold-text">membantu bisnis Anda tampil seperti perusahaan besar, walau baru mulai.</strong>
+          </p>
+          <div class="about-stats rv" style="--d:.4s">
+            <div class="as">
+              <span class="as-n">∞</span>
+              <span class="as-l">Revisi Tersedia</span>
+            </div>
+            <div class="as-d"></div>
+            <div class="as">
+              <span class="as-n">3–7</span>
+              <span class="as-l">Hari Pengerjaan</span>
+            </div>
+            <div class="as-d"></div>
+            <div class="as">
+              <span class="as-n">100%</span>
+              <span class="as-l">Custom Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROSES ═══ -->
+  <section class="sec" id="proses">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">Cara Kerja</p>
+        <h2 class="stitle rv">Proses Mudah,<br/><em>Hasil Maksimal</em></h2>
+        <p class="ssub rv" style="--d:.1s">Dari diskusi pertama hingga website live — kami kawal setiap langkahnya.</p>
+      </div>
+
+      <div class="proses-grid">
+        <div class="proses-item rv" style="--d:0s">
+          <div class="pi-num">01</div>
+          <h3>Diskusi & Brief</h3>
+          <p>Ceritakan bisnis, tujuan website, dan referensi yang Anda suka. Kami dengerin tanpa terburu-buru.</p>
+          <span class="pi-dur">± 1 Hari</span>
+        </div>
+        <div class="proses-arrow rv" style="--d:.05s">→</div>
+        <div class="proses-item rv" style="--d:.1s">
+          <div class="pi-num">02</div>
+          <h3>Mockup & Approval</h3>
+          <p>Desain awal kami kirim untuk ditinjau. Revisi sampai Anda setuju sebelum lanjut development.</p>
+          <span class="pi-dur">± 1–2 Hari</span>
+        </div>
+        <div class="proses-arrow rv" style="--d:.15s">→</div>
+        <div class="proses-item rv" style="--d:.2s">
+          <div class="pi-num">03</div>
+          <h3>Development</h3>
+          <p>Desain dibangun menjadi website fungsional dan responsif. Anda bisa pantau progress kapan saja.</p>
+          <span class="pi-dur">± 2–4 Hari</span>
+        </div>
+        <div class="proses-arrow rv" style="--d:.25s">→</div>
+        <div class="proses-item rv" style="--d:.3s">
+          <div class="pi-num">04</div>
+          <h3>Review & Revisi</h3>
+          <p>Anda uji coba website lengkap. Semua masukan ditampung dan diperbaiki hingga sempurna.</p>
+          <span class="pi-dur">± 1 Hari</span>
+        </div>
+        <div class="proses-arrow rv" style="--d:.35s">→</div>
+        <div class="proses-item rv" style="--d:.4s">
+          <div class="pi-num">05</div>
+          <h3>Launch! 🚀</h3>
+          <p>Website live! Semua file dan akses diserahkan beserta panduan penggunaan dasar.</p>
+          <span class="pi-dur">Hari ke-7 rata-rata</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HARGA ═══ -->
+  <section class="sec sec-dark" id="harga">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">Paket Harga</p>
+        <h2 class="stitle rv">Investasi yang<br/><em>Sepadan</em></h2>
+        <p class="ssub rv" style="--d:.1s">Harga spesial untuk early client kami. Semua paket sudah termasuk desain custom, revisi, dan support.</p>
+      </div>
+
+      <div class="harga-grid">
+
+        <!-- BASIC -->
+        <div class="hcard rv" style="--d:0s">
+          <div class="hcard-tier">Basic</div>
+          <div class="hcard-price-wrap">
+            <span class="hcard-rp">Rp</span>
+            <span class="hcard-price">200.000</span>
+          </div>
+          <p class="hcard-for">Cocok untuk: Landing page, warung digital, portofolio personal</p>
+          <div class="hcard-div"></div>
+          <ul class="hcard-list">
+            <li class="yes"><span>✓</span> 1 Halaman (Landing Page)</li>
+            <li class="yes"><span>✓</span> Desain Custom</li>
+            <li class="yes"><span>✓</span> Responsif HP & Laptop</li>
+            <li class="yes"><span>✓</span> Tombol WhatsApp / Kontak</li>
+            <li class="yes"><span>✓</span> 3x Revisi</li>
+            <li class="yes"><span>✓</span> Selesai 3–5 Hari</li>
+            <li class="no"><span>✗</span> CMS / Dashboard Admin</li>
+            <li class="no"><span>✗</span> Multi Halaman</li>
+            <li class="no"><span>✗</span> Sistem Login</li>
+          </ul>
+          <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20order%20Paket%20Basic%20200rb" target="_blank" class="hcard-btn">Pesan Paket Basic</a>
+        </div>
+
+        <!-- BISNIS -->
+        <div class="hcard hcard-pop rv" style="--d:.12s">
+          <div class="pop-label">✦ Paling Populer</div>
+          <div class="hcard-tier">Bisnis</div>
+          <div class="hcard-price-wrap">
+            <span class="hcard-rp">Rp</span>
+            <span class="hcard-price">600.000</span>
+          </div>
+          <p class="hcard-for">Cocok untuk: Company profile, toko online, website jasa profesional</p>
+          <div class="hcard-div"></div>
+          <ul class="hcard-list">
+            <li class="yes"><span>✓</span> Hingga 5 Halaman</li>
+            <li class="yes"><span>✓</span> Desain Full Custom</li>
+            <li class="yes"><span>✓</span> Responsif Semua Perangkat</li>
+            <li class="yes"><span>✓</span> Katalog Produk / Portfolio</li>
+            <li class="yes"><span>✓</span> WhatsApp & Form Kontak</li>
+            <li class="yes"><span>✓</span> SEO Dasar Terpasang</li>
+            <li class="yes"><span>✓</span> Revisi Unlimited</li>
+            <li class="yes"><span>✓</span> Selesai 5–7 Hari</li>
+            <li class="no"><span>✗</span> Dashboard Admin Penuh</li>
+          </ul>
+          <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20order%20Paket%20Bisnis%20600rb" target="_blank" class="hcard-btn hcard-btn-gold">Pesan Paket Bisnis</a>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="hcard rv" style="--d:.24s">
+          <div class="hcard-tier">Premium</div>
+          <div class="hcard-price-wrap">
+            <span class="hcard-rp">Rp</span>
+            <span class="hcard-price">1.200.000</span>
+          </div>
+          <p class="hcard-for">Cocok untuk: E-commerce penuh, sistem booking, website kompleks & besar</p>
+          <div class="hcard-div"></div>
+          <ul class="hcard-list">
+            <li class="yes"><span>✓</span> Halaman Tidak Terbatas</li>
+            <li class="yes"><span>✓</span> Desain Premium Full Custom</li>
+            <li class="yes"><span>✓</span> Dashboard / CMS Admin</li>
+            <li class="yes"><span>✓</span> Sistem Login User</li>
+            <li class="yes"><span>✓</span> Integrasi Pembayaran</li>
+            <li class="yes"><span>✓</span> Animasi & Interaksi Lanjutan</li>
+            <li class="yes"><span>✓</span> SEO Lanjutan + Optimasi Speed</li>
+            <li class="yes"><span>✓</span> Revisi Unlimited</li>
+            <li class="yes"><span>✓</span> Garansi Support 30 Hari</li>
+          </ul>
+          <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20order%20Paket%20Premium%201.2jt" target="_blank" class="hcard-btn">Pesan Paket Premium</a>
+        </div>
+
+      </div>
+
+      <div class="harga-note rv" style="--d:.36s">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="var(--gd)" stroke-width="1.2"/><path d="M9 8v4M9 6v.01" stroke="var(--gd)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Butuh sesuatu di luar paket? Kami menerima custom order. <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20custom%20order%20website" target="_blank" class="glink">Chat kami sekarang →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PERATURAN PEMBELIAN ═══ -->
+  <section class="sec" id="peraturan">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">Syarat & Ketentuan</p>
+        <h2 class="stitle rv">Peraturan<br/><em>Pembelian</em></h2>
+        <p class="ssub rv" style="--d:.1s">Mohon dibaca dengan seksama sebelum melakukan pemesanan. Kami percaya transparansi adalah fondasi kerja sama yang baik.</p>
+      </div>
+
+      <div class="peraturan-grid">
+        <div class="pcard rv" style="--d:0s">
+          <div class="pcard-ico">💳</div>
+          <h3>Sistem Pembayaran</h3>
+          <ul>
+            <li>DP 50% di awal sebelum pengerjaan dimulai</li>
+            <li>Pelunasan 50% setelah website selesai & disetujui</li>
+            <li>Pembayaran via Transfer Bank / GoPay / OVO / DANA</li>
+            <li>Invoice akan dikirim via WhatsApp</li>
+          </ul>
+        </div>
+        <div class="pcard rv" style="--d:.1s">
+          <div class="pcard-ico">🔄</div>
+          <h3>Revisi & Perubahan</h3>
+          <ul>
+            <li>Paket Basic: 3x revisi termasuk</li>
+            <li>Paket Bisnis & Premium: revisi unlimited selama proses</li>
+            <li>Revisi major setelah serah terima dikenakan biaya tambahan</li>
+            <li>Perubahan brief di tengah pengerjaan dapat mempengaruhi timeline</li>
+          </ul>
+        </div>
+        <div class="pcard rv" style="--d:.2s">
+          <div class="pcard-ico">📦</div>
+          <h3>Konten & Aset</h3>
+          <ul>
+            <li>Client wajib menyediakan teks, foto, dan logo yang diperlukan</li>
+            <li>Jika tidak ada, kami akan gunakan placeholder / stock image</li>
+            <li>Semua aset yang dikirim dianggap legal milik client</li>
+            <li>Kami tidak bertanggung jawab atas konten bermasalah yang diberikan client</li>
+          </ul>
+        </div>
+        <div class="pcard rv" style="--d:.3s">
+          <div class="pcard-ico">🌐</div>
+          <h3>Domain & Hosting</h3>
+          <ul>
+            <li>Domain dan hosting tidak termasuk dalam harga paket</li>
+            <li>Kami bantu rekomendasikan dan setup dengan biaya terpisah</li>
+            <li>Estimasi biaya hosting Rp 200K–500K/tahun</li>
+            <li>Paket Basic bisa diserahkan dalam bentuk file siap upload</li>
+          </ul>
+        </div>
+        <div class="pcard rv" style="--d:.4s">
+          <div class="pcard-ico">⏱️</div>
+          <h3>Timeline & Deadline</h3>
+          <ul>
+            <li>Pengerjaan dimulai setelah DP diterima</li>
+            <li>Estimasi waktu berlaku jika brief sudah lengkap dari awal</li>
+            <li>Keterlambatan penyediaan konten dari client = mundur timeline</li>
+            <li>Rush order (lebih cepat) dikenakan biaya tambahan 30–50%</li>
+          </ul>
+        </div>
+        <div class="pcard rv" style="--d:.5s">
+          <div class="pcard-ico">🔒</div>
+          <h3>Hak & Kepemilikan</h3>
+          <ul>
+            <li>Hak penuh atas website diserahkan setelah pelunasan</li>
+            <li>Kami berhak menampilkan karya di portofolio kami</li>
+            <li>Data dan informasi client dijaga kerahasiaannya</li>
+            <li>Tidak ada refund setelah pengerjaan dimulai kecuali ada kelalaian kami</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="sec sec-dark" id="faq">
+    <div class="con">
+      <div class="sh">
+        <p class="stag rv">FAQ</p>
+        <h2 class="stitle rv">Pertanyaan yang<br/><em>Sering Ditanya</em></h2>
+      </div>
+
+      <div class="faq-wrap">
+        <div class="faq rv" style="--d:0s">
+          <button class="faq-q">
+            <span>Berapa lama website selesai?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Paket Basic: 3–5 hari kerja. Paket Bisnis: 5–7 hari. Paket Premium: 7–14 hari. Timeline mulai berjalan setelah DP diterima dan brief lengkap. Tersedia layanan rush order dengan biaya tambahan.</p></div>
+        </div>
+        <div class="faq rv" style="--d:.07s">
+          <button class="faq-q">
+            <span>Saya tidak paham soal website, bisa tetap order?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Tentu bisa! Kami justru senang membantu klien yang baru pertama kali. Kami akan guide dari konsep, isi konten, hingga cara pakai website setelah selesai. Tidak perlu khawatir soal istilah teknis.</p></div>
+        </div>
+        <div class="faq rv" style="--d:.14s">
+          <button class="faq-q">
+            <span>Apakah harga sudah termasuk domain dan hosting?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Belum. Harga paket mencakup desain dan pengembangan website saja. Domain (.com, .id, dll) dan hosting dibeli terpisah — kami bantu rekomendasikan dan setup-nya. Estimasi biaya hosting sekitar Rp 200K–500K per tahun.</p></div>
+        </div>
+        <div class="faq rv" style="--d:.21s">
+          <button class="faq-q">
+            <span>Bagaimana cara pembayaran dan apakah aman?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Sistem DP 50% di awal, sisa 50% setelah website selesai dan disetujui. Pembayaran via transfer bank atau e-wallet (GoPay, OVO, DANA). Kami berikan invoice dan Anda tidak perlu membayar penuh jika belum puas dengan hasilnya.</p></div>
+        </div>
+        <div class="faq rv" style="--d:.28s">
+          <button class="faq-q">
+            <span>Apakah website bisa diupdate sendiri setelah selesai?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Untuk Paket Bisnis dan Premium berbasis WordPress, Anda bisa update konten sendiri lewat dashboard admin tanpa coding. Kami sediakan panduan penggunaan dan siap bantu jika ada kendala.</p></div>
+        </div>
+        <div class="faq rv" style="--d:.35s">
+          <button class="faq-q">
+            <span>Bagaimana jika saya tidak puas dengan hasil akhirnya?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Kami tidak akan memaksa Anda membayar penuh jika tidak puas. Website tidak diserahkan sebelum Anda setuju. Untuk Paket Bisnis dan Premium, revisi unlimited tersedia selama proses berlangsung agar hasilnya benar-benar sesuai ekspektasi.</p></div>
+        </div>
+        <div class="faq rv" style="--d:.42s">
+          <button class="faq-q">
+            <span>Apakah ada garansi setelah website live?</span>
+            <svg class="faq-arr" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Paket Premium mendapat garansi support 30 hari setelah launch. Paket Basic dan Bisnis mendapat support 7 hari untuk bug fixing teknis. Untuk perubahan konten atau fitur baru setelah masa garansi, kami kenakan biaya maintenance.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="sec sec-cta" id="cta">
+    <div class="con">
+      <div class="cta-box rv">
+        <div class="cta-glow"></div>
+        <div class="cta-lines"></div>
+        <div class="cta-inner">
+          <p class="stag">Mulai Sekarang</p>
+          <h2 class="cta-h2">Siap Punya Website<br/><em>Impian Anda?</em></h2>
+          <p class="cta-p">Hubungi kami via WhatsApp — konsultasi gratis, tidak ada biaya apapun untuk diskusi awal. Kami biasanya balas dalam hitungan menit.</p>
+
+          <div class="cta-acts">
+            <a href="https://wa.me/6282317304798?text=Halo%20Faadhil%20Digital%2C%20saya%20ingin%20konsultasi%20pembuatan%20website%20🙏" target="_blank" rel="noopener noreferrer" class="btn-wa">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.58 2 2 5.58 2 10c0 1.56.42 3.04 1.15 4.31L2 18l3.76-1.12A7.97 7.97 0 0010 18c4.42 0 8-3.58 8-8s-3.58-8-8-8z" fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="1.4"/><path d="M7 9.5c.47.93 1.4 1.87 2.33 2.33.47.24 1.4.47 1.87-.47" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Chat via WhatsApp
+            </a>
+            <a href="tel:+6282317304798" class="btn-tel">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.5 3h3l1.5 4-1.75 1.08a9 9 0 004.67 4.67L12 11l4 1.5v3A1.5 1.5 0 0114.5 17C7.04 17 1 10.96 1 3.5A1.5 1.5 0 013.5 2v1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+              +62 823-1730-4798
+            </a>
+          </div>
+
+          <div class="cta-note">
+            <span>✦ Konsultasi gratis</span>
+            <span class="cn-sep">·</span>
+            <span>✦ Balas &lt; 1 jam</span>
+            <span class="cn-sep">·</span>
+            <span>✦ Tanpa biaya tersembunyi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="con">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/LOGO4721.png" alt="Faadhil Digital" class="fl-logo" />
+          <div>
+            <div class="fl-name">Faadhil<em class="gold-text">Digital</em></div>
+            <div class="fl-tag">Jasa Pembuatan Website Profesional</div>
+          </div>
+        </div>
+        <div class="footer-nav">
+          <div class="fn">
+            <div class="fn-h">Menu</div>
+            <a href="#layanan">Layanan</a>
+            <a href="#hasil">Hasil Kerja</a>
+            <a href="#whyus">Why Us</a>
+            <a href="#proses">Proses</a>
+            <a href="#harga">Harga</a>
+          </div>
+          <div class="fn">
+            <div class="fn-h">Info</div>
             <a href="#about">About</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#works">Hasil Kerja</a>
-            <a href="#hours">Jam Kerja</a>
-            <a href="#pricing">Harga</a>
             <a href="#faq">FAQ</a>
+            <a href="#peraturan">Peraturan</a>
+            <a href="#cta">Kontak</a>
+          </div>
+          <div class="fn">
+            <div class="fn-h">Kontak</div>
+            <a href="https://wa.me/6282317304798" target="_blank">WhatsApp</a>
+            <a href="tel:+6282317304798">+62 823-1730-4798</a>
+            <a href="https://nagara-store2.vercel.app/" target="_blank">Portofolio ↗</a>
+          </div>
         </div>
-
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Faadhil Digital. All rights reserved.</span>
+        <span class="footer-love">Dibuat dengan di Indonesia</span>
+      </div>
     </div>
+  </footer>
 
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content reveal">
-
-        <div class="badge">
-            ✦ PREMIUM WEB EXPERIENCE
-        </div>
-
-        <h1>
-            Build Your <span>Luxury</span><br>
-            Digital Presence
-        </h1>
-
-        <p>
-            Website modern dengan desain cinematic, performa cepat,
-            animasi premium, dan tampilan yang membuat bisnis Anda terlihat jauh lebih profesional.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="https://wa.me/6282317304798" class="btn btn-gold">
-                Mulai Sekarang
-            </a>
-
-            <a href="#portfolio" class="btn btn-dark">
-                Lihat Portfolio
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SERVICES -->
-
-<section id="services">
-
-    <div class="container">
-
-        <div class="section-title reveal">
-
-            <h2>Layanan Eksklusif</h2>
-
-            <p>
-                Website modern dengan kualitas visual premium dan pengalaman terbaik.
-            </p>
-
-        </div>
-
-        <div class="bento">
-
-            <div class="bento-card large reveal">
-
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop">
-
-                <h3>Luxury Website</h3>
-
-                <p>
-                    Desain modern cinematic dengan animasi super smooth dan tampilan elegan.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Responsive</h3>
-
-                <p>
-                    Optimal di semua device dan tetap terlihat premium.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Fast Loading</h3>
-
-                <p>
-                    Website ringan, cepat, dan performa maksimal.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>SEO Ready</h3>
-
-                <p>
-                    Struktur modern agar lebih mudah ditemukan Google.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Premium Animation</h3>
-
-                <p>
-                    Smooth scrolling, reveal effect, dan parallax modern.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ABOUT US -->
-
-<section id="about">
-
-    <div class="container">
-
-        <div class="section-title reveal">
-
-            <h2>About Faadhil Digital</h2>
-
-            <p>
-                Bukan sekadar bikin website, tapi membantu bisnis tampil
-                lebih profesional dan dipercaya pelanggan.
-            </p>
-
-        </div>
-
-        <div class="bento">
-
-            <!-- LEFT -->
-
-            <div class="bento-card large reveal">
-
-                <img
-                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2070&auto=format&fit=crop"
-                alt="Faadhil Digital">
-
-                <div style="position:relative;z-index:2;">
-
-                    <div class="badge"
-                    style="margin-bottom:20px;">
-                        ✦ ABOUT US
-                    </div>
-
-                    <h3>
-                        Membangun Website
-                        Yang Terlihat Mahal
-                        & Profesional
-                    </h3>
-
-                    <p style="margin-top:20px;line-height:1.9;">
-                        Faadhil Digital fokus membuat website modern
-                        dengan tampilan premium, loading cepat,
-                        dan pengalaman pengguna yang nyaman.
-                        Cocok untuk UMKM, toko bangunan,
-                        bisnis lokal, personal branding,
-                        hingga company profile.
-                    </p>
-
-                    <p style="margin-top:18px;line-height:1.9;">
-                        Setiap website dibuat dengan desain custom,
-                        responsive di semua device,
-                        dan dirancang supaya bisnis terlihat
-                        lebih terpercaya di mata pelanggan.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- RIGHT -->
-
-            <div class="bento-card reveal">
-
-                <h3>Modern Design</h3>
-
-                <p>
-                    Desain clean, elegan, dan mengikuti
-                    standar website modern saat ini.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Fast Response</h3>
-
-                <p>
-                    Komunikasi cepat dan pengerjaan jelas
-                    dari awal sampai website selesai.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Custom Website</h3>
-
-                <p>
-                    Semua website dibuat sesuai kebutuhan
-                    bisnis dan identitas brand client.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Trusted Service</h3>
-
-                <p>
-                    Fokus pada kualitas, kenyamanan client,
-                    dan hasil akhir yang profesional.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- PORTFOLIO -->
-
-<section id="portfolio">
-
-    <div class="container">
-
-        <div class="section-title reveal">
-
-            <h2>Featured Works</h2>
-
-            <p>
-                Portfolio modern dengan kualitas agency internasional.
-            </p>
-
-        </div>
-
-        <div class="bento">
-
-            <div class="bento-card large reveal">
-
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop">
-
-                <h3>Creative Agency</h3>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop">
-
-                <h3>Startup Website</h3>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=2070&auto=format&fit=crop">
-
-                <h3>Luxury Brand</h3>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop">
-
-                <h3>Modern Company</h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- HASIL KERJA -->
-
-<section id="works">
-
-    <div class="container">
-
-        <div class="section-title reveal">
-
-            <h2>Hasil Kerjaan</h2>
-
-            <p>
-                Beberapa project website modern yang sudah saya kerjakan
-                untuk bisnis dan toko lokal.
-            </p>
-
-        </div>
-
-        <div class="bento">
-
-            <!-- PROJECT 1 -->
-
-            <div class="bento-card large reveal">
-
-                <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-                alt="Nagara Store">
-
-                <div style="position:relative;z-index:2;">
-
-                    <div class="badge"
-                    style="margin-bottom:18px;">
-                        ✦ LIVE PROJECT
-                    </div>
-
-                    <h3>Nagara Store</h3>
-
-                    <p style="margin-bottom:25px;">
-                        Website toko bahan bangunan premium
-                        dengan admin panel realtime, kategori produk,
-                        keranjang belanja, dan checkout WhatsApp.
-                    </p>
-
-                    <a
-                    href="https://nagara-store2.vercel.app/"
-                    target="_blank"
-                    class="btn btn-gold">
-
-                        Kunjungi Website
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- FEATURE -->
-
-            <div class="bento-card reveal">
-
-                <h3>Realtime Admin</h3>
-
-                <p>
-                    Tambah produk, edit harga,
-                    ubah stok, dan sinkron realtime.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Premium UI</h3>
-
-                <p>
-                    Desain modern dengan tampilan
-                    cinematic dan animasi smooth.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Mobile Friendly</h3>
-
-                <p>
-                    Optimal di HP, tablet,
-                    dan desktop.
-                </p>
-
-            </div>
-
-            <div class="bento-card reveal">
-
-                <h3>Fast Performance</h3>
-
-                <p>
-                    Loading cepat dengan
-                    struktur website modern.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- PRICING -->
-
-<section id="pricing">
-
-    <div class="container">
-
-        <div class="section-title reveal">
-
-            <h2>Premium Pricing</h2>
-
-            <p>
-                Transparan, modern, dan sesuai kualitas premium.
-            </p>
-
-        </div>
-
-        <div class="pricing">
-
-            <div class="price-card reveal">
-
-                <h3>Basic</h3>
-
-                <div class="price">200rb</div>
-
-                <ul>
-                    <li>Landing Page</li>
-                    <li>Responsive</li>
-                    <li>WA Button</li>
-                    <li>1x Revisi</li>
-                </ul>
-
-                <a href="#" class="btn btn-dark">
-                    Pilih Paket
-                </a>
-
-            </div>
-
-            <div class="price-card featured reveal">
-
-                <h3>Business</h3>
-
-                <div class="price">600rb</div>
-
-                <ul>
-                    <li>5 Halaman</li>
-                    <li>SEO Basic</li>
-                    <li>Hosting 1 Tahun</li>
-                    <li>3x Revisi</li>
-                </ul>
-
-                <a href="#" class="btn btn-gold">
-                    Paling Populer
-                </a>
-
-            </div>
-
-            <div class="price-card reveal">
-
-                <h3>Premium</h3>
-
-                <div class="price">1jt 200rb</div>
-
-                <ul>
-                    <li>Unlimited Page</li>
-                    <li>Premium Animation</li>
-                    <li>Custom Design</li>
-                    <li>Unlimited Revisi</li>
-                </ul>
-
-                <a href="#" class="btn btn-dark">
-                    Pilih Paket
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- WORKING HOURS -->
-
-<section id="hours">
-    <div class="container">
-        <div class="section-title reveal">
-            <h2>Jam Kerja</h2>
-            <p>Ini jadwal aktif gue buat bales chat & ngerjain website</p>
-        </div>
-
-        <div class="bento">
-            <div class="bento-card reveal">
-                <h3>Senin</h3>
-                <p>Mulai kerja jam 16:30 WITA. Full bisa bales & revisi cepat.</p>
-            </div>
-
-            <div class="bento-card reveal">
-                <h3>Selasa</h3>
-                <p>16:30 - Maghrib bisa kerja. Ba'da Maghrib - Isya ada pengajian.</p>
-            </div>
-
-            <div class="bento-card reveal">
-                <h3>Rabu</h3>
-                <p>Mulai jam 16:30 WITA. Sore ada pengajian sampe jam 17:45. Malam Rabu free.</p>
-            </div>
-
-            <div class="bento-card reveal">
-                <h3>Kamis - Jumat</h3>
-                <p>Kamis full jadwal sampe malam. Jumat mulai 16:30, malam Jumat free.</p>
-            </div>
-
-            <div class="bento-card reveal">
-                <h3>Sabtu - Minggu</h3>
-                <p>Full free. Paling cepat bales & paling cepat jadi.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ -->
-
-<section id="faq">
-    <div class="container">
-        <div class="section-title reveal">
-            <h2>FAQ</h2>
-            <p>Pertanyaan yang paling sering ditanyakan client.</p>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Berapa lama pengerjaan website?</div>
-            <div class="faq-answer">
-                Paket Dasar 2-3 hari kerja, Paket Bisnis 5-7 hari kerja, Paket Premium 10-14 hari kerja. Tergantung seberapa cepat lu kirim materi dan revisi.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Apakah website mobile friendly?</div>
-            <div class="faq-answer">
-                Ya, semua website sudah 100% responsive dan optimal di HP, tablet, maupun desktop.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Apakah bisa revisi?</div>
-            <div class="faq-answer">
-                Bisa. Paket Dasar 1x revisi, Paket Bisnis 3x revisi, Paket Premium unlimited revisi selama 30 hari setelah jadi.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Kalau saya nggak bisa desain, gimana?</div>
-            <div class="faq-answer">
-                Tenang, lu tinggal kirim logo + foto + teks yang mau ditampilkan. Sisanya gue yang atur biar keliatan premium. Kalau bingung nulis, gue bantu bikinin draftnya juga.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Domain & hosting sudah termasuk?</div>
-            <div class="faq-answer">
-                Paket Dasar belum termasuk domain & hosting. Paket Bisnis & Premium udah include hosting 1 tahun. Domain bisa gue bantu beliin juga, harganya mulai 150rb/tahun.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Gimana cara bayarnya? Aman nggak?</div>
-            <div class="faq-answer">
-                Aman. Sistem DP 50% di awal, 50% lagi pas website udah jadi dan lu udah cek. Bisa transfer BCA/BRI, DANA, OVO. Nggak ada istilah transfer full di awal.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Bisa dipasangin Google Maps, IG, WA, Shopee?</div>
-            <div class="faq-answer">
-                Bisa semua. Paket Dasar udah include tombol WA + Maps. Paket Bisnis & Premium bisa gue sambungin ke IG, TikTok, Shopee, Tokped, atau sistem apapun yang lu pakai.
-            </div>
-        </div>
-
-        <div class="faq-item reveal">
-    <div class="faq-question">Kapan jam kerja lu? Kalau chat malam bisa dibales?</div>
-    <div class="faq-answer">
-        Gue kerja mulai jam 16:30 WITA. Selasa ada pengajian Ba'da Maghrib - Isya. Rabu mulai 17:45 karena pengajian sore. Kamis full jadwal sampe malam. Malam Rabu & Jumat juga full ada acara. Sabtu Minggu paling free. Chat masuk di luar jam itu bakal gue bales pas udah mulai kerja.
-    </div>
-</div>
-
-        <div class="faq-item reveal">
-            <div class="faq-question">Apakah ada garansi kalau ada error?</div>
-            <div class="faq-answer">
-                Ada. Garansi 30 hari penuh buat perbaikan bug atau error teknis. Kalau masalahnya dari gue, gue benerin gratis. Kalau mau update konten baru, itu beda lagi ya.
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA -->
-
-<section class="cta">
-
-    <div class="container">
-
-        <div class="cta-box reveal">
-
-            <h2>
-                Ready To Build <br>
-                Something Premium?
-            </h2>
-
-            <a href="https://wa.me/6282317304798" class="btn btn-gold">
-                Contact Now
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-<footer>
-    © 2026 Faadhil Digital — Super Premium Experience
-</footer>
-
-<a href="https://wa.me/6282317304798" class="whatsapp">
-✦
-</a>
-
-<script>
-
-/* =========================
-LOADER
-========================= */
-
-window.addEventListener('load',()=>{
-
-    setTimeout(()=>{
-
-        document.querySelector('.loader')
-        .classList.add('hide');
-
-    },1500);
-
-});
-
-/* =========================
-CURSOR GLOW
-========================= */
-
-const glow = document.querySelector('.glow');
-
-window.addEventListener('mousemove',(e)=>{
-
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-
-});
-
-/* =========================
-REVEAL
-========================= */
-
-const reveals = document.querySelectorAll('.reveal');
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add('active');
-
-        }
-
-    });
-
-},{
-    threshold:.1
-});
-
-reveals.forEach(el=>observer.observe(el));
-
-/* =========================
-FAQ
-========================= */
-
-const faqItems =
-document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item=>{
-
-    item.addEventListener('click',()=>{
-
-        item.classList.toggle('active');
-
-    });
-
-});
-
-/* =========================
-PROGRESS BAR
-========================= */
-
-window.addEventListener('scroll',()=>{
-
-    const progress =
-    (window.scrollY /
-    (document.body.scrollHeight -
-    window.innerHeight)) * 100;
-
-    document.querySelector('.progress')
-    .style.width = progress + '%';
-
-});
-
-</script>
-
+  <script src="js/script.js"></script>
 </body>
 </html>
